@@ -13,21 +13,22 @@ repositories {
 ext {
     swagger_annotations_version = "2.0.0"
     jackson_version = "2.6.4"
-    jersey_version = "2.29.1"
+    jersey_version = "1.19.4"
+    jodatime_version = "2.10.5"
     junit_version = "4.13.1"
 }
 
 dependencies {
     implementation "io.swagger.core.v3:swagger-annotations:$swagger_annotations_version"
-    implementation "org.glassfish.jersey.core:jersey-client:$jersey_version"
-    implementation "org.glassfish.jersey.media:jersey-media-multipart:$jersey_version"
-    implementation "org.glassfish.jersey.media:jersey-media-json-jackson:$jersey_version"
+    implementation "com.sun.jersey:jersey-client:$jersey_version"
+    implementation "com.sun.jersey.contribs:jersey-multipart:$jersey_version"
     implementation "com.fasterxml.jackson.core:jackson-core:$jackson_version"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jackson_version"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jackson_version"
-    implementation "org.glassfish.jersey.inject:jersey-hk2:$jersey_version"
+    implementation "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:$jackson_version"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson_version"}
     implementation "com.github.joschi.jackson:jackson-datatype-threetenbp:$jackson_version"
-    implementation "com.brsanthu:migbase64:2.2"
+    implementation 'com.sun.xml.ws:jaxws-rt:2.3.3'
     testImplementation "junit:junit:$junit_version"
 }
 
