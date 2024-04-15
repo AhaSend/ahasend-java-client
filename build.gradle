@@ -1,0 +1,62 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+}
+
+ext {
+    swagger_annotations_version = "2.0.0"
+    jackson_version = "2.6.4"
+    jersey_version = "2.29.1"
+    junit_version = "4.13.1"
+}
+
+dependencies {
+    implementation "io.swagger.core.v3:swagger-annotations:$swagger_annotations_version"
+    implementation "org.glassfish.jersey.core:jersey-client:$jersey_version"
+    implementation "org.glassfish.jersey.media:jersey-media-multipart:$jersey_version"
+    implementation "org.glassfish.jersey.media:jersey-media-json-jackson:$jersey_version"
+    implementation "com.fasterxml.jackson.core:jackson-core:$jackson_version"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:$jackson_version"
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jackson_version"
+    implementation "org.glassfish.jersey.inject:jersey-hk2:$jersey_version"
+    implementation "com.github.joschi.jackson:jackson-datatype-threetenbp:$jackson_version"
+    implementation "com.brsanthu:migbase64:2.2"
+    testImplementation "junit:junit:$junit_version"
+}
+
+group = 'com.ahasend'
+version = '1.0.1'
+description = 'API Client for sending emails using AhaSend'
+
+java.sourceCompatibility = 11
+java.targetCompatibility = 11
+
+tasks.register('testsJar', Jar) {
+    archiveClassifier = 'tests'
+    from(sourceSets.test.output)
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+            artifact(testsJar)
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
