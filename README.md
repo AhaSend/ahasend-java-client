@@ -92,7 +92,7 @@ public class EmailApiExample {
 
         EmailApi apiInstance = new EmailApi();
         Email body = new Email(); // Email | Email object.
-        String contentType = "contentType_example"; // String | Only application/json is supported
+        String contentType = "application/json"; // String | Only 'application/json' is supported
         try {
             SuccessfulResponse result = apiInstance.sendEmail(body, contentType);
             System.out.println(result);
